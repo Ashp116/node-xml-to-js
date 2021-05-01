@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Ashp116/xmltojson/issues"
   },
-  "homepage": "https://github.com/Ashp116/xmltojson#readme"
+  "homepage": "https://github.com/Ashp116/xmltojson#readme",
+  "dependencies": {
+    "@types/node": "^15.0.1"
+  }
 }
