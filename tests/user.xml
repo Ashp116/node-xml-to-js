@@ -1,6 +1,42 @@
-<note>
-    <to>Tove</to>
-    <from>Jani</from>
-    <heading>Reminder</heading>
-    <body>Don't forget me this weekend!</body>
-</note>
+<?xml version="1.0" encoding="utf-8" ?>
+<Note test="Test" name="Hi">
+    <to>
+        Tove
+    </to>
+    <bool>
+        false
+    </bool>
+    <int>
+        1
+    </int>
+    <from>
+        Jani
+    </from>
+    <heading>
+        Reminder
+    </heading>
+    <body>
+        Don't forget me this weekend!
+    </body>
+    <test id="erere">
+        <to>
+            <conf>No weher2</conf>
+            <lol id="ewqrqwer">BRO2</lol>
+            <to id="asdfasdf">
+                <conf asdf="24352345345">No weher3</conf>
+                <lol>BRO3</lol>
+                <to>
+                    <conf>No weher4</conf>
+                    <lol>BRO4</lol>
+                    <to>
+                        <conf>No weher5</conf>
+                        <lol>BRO5</lol>
+                    </to>
+                </to>
+            </to>
+        </to>
+        <from asd="asd23rew">Jani2</from>
+        <heading>Reminder2</heading>
+        <body>Don't forget me this weekend!2</body>
+    </test>
+</Note>
