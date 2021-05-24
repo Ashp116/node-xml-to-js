@@ -1,8 +1,8 @@
 {
-  "name": "xmltojson",
-  "version": "1.0.0",
+  "name": "node-xml-to-json",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./out/main.js",
   "scripts": {
     "start": "nodemon ./out/main.js",
     "build": "npx tsc -w",
@@ -14,19 +14,17 @@
   },
   "author": "Ashp116",
   "license": "ISC",
+  "directories": {
+    "lib": "./"
+  },
   "bugs": {
     "url": "https://github.com/Ashp116/xmltojson/issues"
   },
   "homepage": "https://github.com/Ashp116/xmltojson#readme",
   "dependencies": {
-    "@types/dom-parser": "^0.1.1",
-    "@types/events": "^3.0.0",
     "@types/node": "^15.0.1",
-    "dom-parser": "^0.1.6",
-    "indent-string": "^5.0.0",
+    "node-xml-to-json": "^1.0.0",
     "nodemon": "^2.0.7",
-    "parse-string-boolean": "^1.0.1",
-    "strip-indent": "^4.0.0",
-    "xmldom": "^0.6.0"
+    "parse-string-boolean": "^1.0.1"
   }
 }

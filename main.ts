@@ -1,20 +1,13 @@
 import * as fs from 'fs';
 import * as parseBoolean from "parse-string-boolean";
-import {EventEmitter} from 'events'
-
 let xmlDir = "C:\\xmltojson\\tests\\user.xml"
 
-interface parserXML extends EventEmitter {
-    on(event: 'root', listener: (XML: string) => void): this;
-    on(event: 'declaration', listener: (XML: string) => void): this;
-}
-const parseXML:parserXML = new EventEmitter()
 
 function ignoreElements(arr:string[], start: number, end: number) {
     return arr.splice(start,end)
 }
 
-function ignoreElement(element: string) {
+function ignoreElement(element: string): boolean {
     if (element.includes('?xml') || element.includes('/')) {
         return true
     }
@@ -23,7 +16,7 @@ function ignoreElement(element: string) {
     }
 }
 
-function convertTypesAuto(data: any) {
+function convertTypesAuto(data: any): any {
     if (!isNaN(parseFloat(data))) {
         return parseFloat(data);
     }
@@ -35,7 +28,7 @@ function convertTypesAuto(data: any) {
     }
 }
 
-function elementFromString(str: string) {
+function elementFromString(str: string): string {
     if (str !== undefined) {
         let parsedStr = str.replace(">", " ").replace("/", " ").split(" ")
         if (parsedStr[0] !== "") {
@@ -46,28 +39,71 @@ function elementFromString(str: string) {
     }
 }
 
-function valueFromElement(str: string) {
+function valueFromElement(str: string): string {
     if (str !== undefined) {
         let parsedStr = str.replace(">", " ").replace("/", " ").split(" ")
         parsedStr.shift()
         if (parsedStr[0] !== "") {
-            return convertTypesAuto(parsedStr.join().replace(",", " "))
+
+            // @ts-ignore
+            if (onAttribute(str) !== false && onAttribute(str) !== undefined) {
+
+                // @ts-ignore
+                let {attributes,raw} = onAttribute(str)
+                let send = attributes
+
+                send["value"] = convertTypesAuto(parsedStr.join(" ").replace(raw, "").trim())
+                return send
+            }
+            else {
+                return convertTypesAuto(parsedStr.join(" "))
+            }
         }
     }
 }
 
-function onAttribute(element) {
+function onAttribute(element): OnAttribute {
     let send = {}
+    let rawAttributes = ""
 
     element.split(" ").forEach((val) => {
         if (val.includes("=")) {
             const index = val.split("=")[0]
-            const value = val.split("=")[1].split(`"`)[1]
+            const value = val.split("=")[1].split(`"`)[1] || val.split("=")[1].split(`'`)[1] || val.split("=")[1].split("`")[1]
             send["_"+ index] = value
+
+            if (val.includes("'")) {
+                rawAttributes = rawAttributes + `${index}='${value}'`
+            }
+            else if (val.includes(`"`)) {
+                rawAttributes = rawAttributes + `${index}="${value}"`
+            }
+            else if (val.includes("`")) {
+                rawAttributes = rawAttributes + index + "=`"+value+"`"
+            }
         }
     })
 
-    return send;
+    if (send) {
+        if (Object.keys(send).length !== 0) {
+            return {attributes: send, raw: rawAttributes};
+        }
+    }
+    else {
+        return false
+    }
+}
+
+function onDeclaration(rawStr: string) {
+    let str = rawStr.replace("<?","").replace("?>","")
+
+    if (onAttribute(str) !== false && onAttribute(str) !== undefined) {
+        // @ts-ignore
+        console.log(onAttribute(str))
+    }
+    else {
+        return rawStr
+    }
 }
 
 function nestedChild(arr: string[], type?: "none" | "nested") {
@@ -99,7 +135,7 @@ function nestedChild(arr: string[], type?: "none" | "nested") {
     return send
 }
 
-function Sort(rawXML: string) {
+function XmlParser(rawXML: string,options: ToJSONOptions | ToObjectOptions):object {
     let root = ""
     let nestedArr = []
     let object = {}
@@ -109,6 +145,9 @@ function Sort(rawXML: string) {
         arrayXML.shift()
 
     /*Declaration*/
+    if (declaration !== "") {
+        object["Declaration"] = onDeclaration(declaration)
+    }
 
     arrayXML.forEach(((value, index) => {
         let element = elementFromString(value)
@@ -131,7 +170,10 @@ function Sort(rawXML: string) {
                 if (index == 0) {
                     root = element
                     object[root] = {}
-                    object[root] = onAttribute(value)
+                    if (onAttribute(value) !== false && onAttribute(value) !== undefined) {
+                        // @ts-ignore
+                        object[root] = onAttribute(value).attributes;
+                    }
                 }
             }
         }
@@ -160,7 +202,6 @@ function Sort(rawXML: string) {
                     else {
                         parentElement = elementFromString(value)
                         object[root][parentElement] = {}
-                        object[root][parentElement] = onAttribute(value)
                     }
                 }
             })
@@ -171,7 +212,7 @@ function Sort(rawXML: string) {
     return object
 }
 
-function trimXML(data, removeDeclaration?: boolean) {
+function trimXML(data, removeDeclaration?: boolean): TrimXML {
     /*Default Values*/
 
     removeDeclaration = removeDeclaration || false
@@ -184,30 +225,87 @@ function trimXML(data, removeDeclaration?: boolean) {
     if (removeDeclaration) {
         let start = newXML.lastIndexOf("<?")
         let end = newXML.lastIndexOf("?>") + 2
-        newXML = newXML.replace(newXML.slice(start,end),"")
         declaration = newXML.slice(start,end)
+        newXML = newXML.replace(declaration,"")
     }
-
     return {XML: newXML, declaration: declaration};
 }
 
 /*
 * Converts XML String to JS Object
 * */
-export function toObject(XML: string,options?: Options):Object | void {
-    return Sort(XML)
+export function toObject(XML: string,options?: ToObjectOptions):Object | void {
+    if (options === undefined) options = {ignoreAttributes: false, ignoreDeclaration: false, ignoreRoot: false}
+
+    if (options.ignoreAttributes === undefined) {
+        options.ignoreAttributes = false
+    }
+    else if (options.ignoreDeclaration === undefined) {
+        options.ignoreDeclaration = false
+    }
+    else if (options.ignoreRoot === undefined) {
+        options.ignoreRoot = false
+    }
+
+    return XmlParser(XML, options)
 }
+
+/*
+* Converts XML String to JSON
+* */
+export function toJSON(XML: string,options?: ToJSONOptions):Object | void {
+    if (options === undefined) options = {beautify: false, ignoreAttributes: false, ignoreDeclaration: false, ignoreRoot: false}
+    if (options.beautify === undefined) {
+        options.beautify = false
+    }
+    else if (options.ignoreAttributes === undefined) {
+        options.ignoreAttributes = false
+    }
+    else if (options.ignoreDeclaration === undefined) {
+        options.ignoreDeclaration = false
+    }
+    else if (options.ignoreRoot === undefined) {
+        options.ignoreRoot = false
+    }
+
+    let Parsed = XmlParser(XML, options)
+    if (options.beautify) {
+        return JSON.stringify(Parsed,null, "\t")
+    }
+    else {
+        return JSON.stringify(Parsed)
+    }
+}
+
 
 fs.readFile(xmlDir, 'utf8' , (err, data) => {
     if (err) {
         console.error(err)
         return
     }
-   console.log(toObject(data).Note)
+   // @ts-ignore
+    console.log(toObject(data).unit.test)
+    console.log(toJSON(data, {beautify: true}))
 })
-type Options = {
+type ToObjectOptions = {
+    ignoreAttributes?: boolean
+    ignoreRoot?: boolean
+    ignoreDeclaration?: boolean
+}
+
+type ToJSONOptions = {
     beautify?: boolean
     ignoreAttributes?: boolean
     ignoreRoot?: boolean
     ignoreDeclaration?: boolean
+}
+
+type OnAttribute = {
+    attributes: object,
+    raw: string
+} | false
+
+type TrimXML = {
+    XML: string,
+    declaration: string
 }
