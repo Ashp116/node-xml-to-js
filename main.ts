@@ -1,5 +1,5 @@
+/// <reference path="./typings/index.d.ts" />
 import * as parseBoolean from "parse-string-boolean";
-
 
 function ignoreElements(arr:string[], start: number, end: number) {
     return arr.splice(start,end)

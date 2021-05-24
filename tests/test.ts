@@ -1,4 +1,6 @@
-import {toObject, toJSON} from 'node-xml-to-json';
+// @ts-ignore
+import * as parser from 'node-xml-to-json';
+import {ToJSONOptions, ToObjectOptions} from 'node-xml-to-json';
 import * as fs from "fs";
 let xmlDir = "C:\\xmltojson\\tests\\user.xml"
 
@@ -8,6 +10,6 @@ fs.readFile(xmlDir, 'utf8' , (err, data) => {
         return
     }
     // @ts-ignore
-    console.log(toObject(data))
-    console.log(toJSON(data, {beautify: true}))
+    console.log(parser.toObject(data))
+    console.log(parser.toJSON(data, {beautify: true}))
 })
