@@ -1,6 +1,4 @@
-import * as fs from 'fs';
 import * as parseBoolean from "parse-string-boolean";
-let xmlDir = "C:\\xmltojson\\tests\\user.xml"
 
 
 function ignoreElements(arr:string[], start: number, end: number) {
@@ -99,7 +97,7 @@ function onDeclaration(rawStr: string) {
 
     if (onAttribute(str) !== false && onAttribute(str) !== undefined) {
         // @ts-ignore
-        console.log(onAttribute(str))
+        return onAttribute(str)
     }
     else {
         return rawStr

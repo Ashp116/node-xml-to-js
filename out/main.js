@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toJSON = exports.toObject = void 0;
 const parseBoolean = require("parse-string-boolean");
-let xmlDir = "C:\\xmltojson\\tests\\user.xml";
 function ignoreElements(arr, start, end) {
     return arr.splice(start, end);
 }
@@ -87,7 +86,7 @@ function onDeclaration(rawStr) {
     let str = rawStr.replace("<?", "").replace("?>", "");
     if (onAttribute(str) !== false && onAttribute(str) !== undefined) {
         // @ts-ignore
-        console.log(onAttribute(str));
+        return onAttribute(str);
     }
     else {
         return rawStr;

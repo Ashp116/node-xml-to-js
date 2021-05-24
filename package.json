@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "description": "",
   "main": "./out/main.js",
+  "types": "/typings/index.d.ts",
   "scripts": {
     "start": "nodemon ./out/main.js",
     "build": "npx tsc -w",
@@ -23,7 +24,7 @@
   "homepage": "https://github.com/Ashp116/xmltojson#readme",
   "dependencies": {
     "@types/node": "^15.0.1",
-    "node-xml-to-json": "^1.0.2",
+    "node-xml-to-json": "^1.0.3",
     "nodemon": "^2.0.7",
     "parse-string-boolean": "^1.0.1"
   }

@@ -1,12 +1,13 @@
-import {toObject} from 'node-xml-to-json';
-toObject(`<unit>
-    <test>
-        <case>
-            <justText>blah blah</justText>
-        </case>
-        <case>
-            <attribText attrib='das'>capital
-            </attribText>
-        </case>
-    </test>
-</unit>`)
+import {toObject, toJSON} from 'node-xml-to-json';
+import * as fs from "fs";
+let xmlDir = "C:\\xmltojson\\tests\\user.xml"
+
+fs.readFile(xmlDir, 'utf8' , (err, data) => {
+    if (err) {
+        console.error(err)
+        return
+    }
+    // @ts-ignore
+    console.log(toObject(data))
+    console.log(toJSON(data, {beautify: true}))
+})
