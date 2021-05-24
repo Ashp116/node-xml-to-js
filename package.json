@@ -15,7 +15,7 @@
   "author": "Ashp116",
   "license": "ISC",
   "directories": {
-    "lib": "./"
+    "lib": "./out"
   },
   "bugs": {
     "url": "https://github.com/Ashp116/xmltojson/issues"
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/Ashp116/xmltojson#readme",
   "dependencies": {
     "@types/node": "^15.0.1",
-    "node-xml-to-json": "^1.0.0",
+    "node-xml-to-json": "^1.0.1",
     "nodemon": "^2.0.7",
     "parse-string-boolean": "^1.0.1"
   }
