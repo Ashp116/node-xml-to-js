@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toJSON = exports.toObject = void 0;
-const fs = require("fs");
 const parseBoolean = require("parse-string-boolean");
 let xmlDir = "C:\\xmltojson\\tests\\user.xml";
 function ignoreElements(arr, start, end) {
@@ -246,12 +245,3 @@ function toJSON(XML, options) {
     }
 }
 exports.toJSON = toJSON;
-fs.readFile(xmlDir, 'utf8', (err, data) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    // @ts-ignore
-    console.log(toObject(data).unit.test);
-    console.log(toJSON(data, { beautify: true }));
-});
