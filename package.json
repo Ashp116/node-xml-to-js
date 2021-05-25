@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon ./out/main.js",
     "build": "npx tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon ./out/tests/test.js"
   },
   "repository": {
     "type": "git",

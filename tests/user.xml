@@ -1,11 +1,13 @@
-<unit>
-    <test>
-        <case>
-            <justText>blah blah</justText>
-        </case>
-        <case>
-            <attribText attrib='das'>capital
-            </attribText>
-        </case>
-    </test>
-</unit>
+<Ashp116 id="116">
+    <favirote>
+        <color>Red</color>
+        <sport>Tennis, Basket Ball</sport>
+        <gaming>None</gaming>
+        <hobby>Game Development</hobby>
+    </favirote>
+    <IsAMillionaire>false</IsAMillionaire>
+    <IsATrillionaire>true</IsATrillionaire>
+    <extra>
+        <joke>What's the best thing about Switzerland? I don't know, but the flag is a big plus</joke>
+    </extra>
+</Ashp116>
