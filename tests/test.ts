@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as parser from 'node-xml-to-json';
 import {ToJSONOptions, ToObjectOptions} from 'node-xml-to-json';
 import * as fs from "fs";
