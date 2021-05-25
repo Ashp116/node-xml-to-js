@@ -1,6 +1,6 @@
 <div align="center">
 
-#node-xml-to-js
+# node-xml-to-js
     
 Easily convert XML data to ***JS Object*** or ***JSON***
 
@@ -13,7 +13,7 @@ Easily convert XML data to ***JS Object*** or ***JSON***
 
 -----------------
 
-#Installation
+# Installation
 ``` 
 npm install node-xml-to-js --save 
 ```
@@ -21,7 +21,7 @@ npm install node-xml-to-js --save
 
 
 ----------------
-#Example
+# Example
 
 Here is an example project
 
