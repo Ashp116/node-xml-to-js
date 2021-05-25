@@ -75,3 +75,9 @@ jspm_packages/
 
 # .idea
 /.idea/
+
+#out
+/out/
+
+#test.ts
+/tests/test.ts
