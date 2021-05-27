@@ -1,15 +1,17 @@
 <div align="center">
 
 # node-xml-to-js
-    
 Easily convert XML data to ***JS Object*** or ***JSON***
 
-</div>
+
 
 ------------------------
 
-[![NPM](https://img.shields.io/badge/npm-v1.0.1-blue)](https://www.npmjs.com/package/node-xml-to-js)
+[![NPM](https://img.shields.io/badge/npm-v1.0.2-blue)](https://www.npmjs.com/package/node-xml-to-js)
+</div>
 
+### Why chose this module?
+Node-xml-to-js module is easy and beginner-friendly module. It allows you to use isolated function for converting. The best part is you can customize: beautify your code, ignore root, ignore declaration, and more!
 
 -----------------
 
