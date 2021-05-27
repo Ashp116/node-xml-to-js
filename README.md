@@ -7,7 +7,7 @@ Easily convert XML data to ***JS Object*** or ***JSON***
 
 ------------------------
 
-[![NPM](https://img.shields.io/badge/npm-v1.0.2-blue)](https://www.npmjs.com/package/node-xml-to-js)
+[![NPM](https://img.shields.io/badge/npm-v1.0.3-blue)](https://www.npmjs.com/package/node-xml-to-js)
 </div>
 
 ### Why chose this module?
