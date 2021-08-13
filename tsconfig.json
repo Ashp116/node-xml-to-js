@@ -6,7 +6,4 @@
     "noImplicitAny": false,
     "outDir": "out",
   },
-  "files": [
-    "./typings/index.d.ts"
-  ]
 }
