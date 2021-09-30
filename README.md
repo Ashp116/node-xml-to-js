@@ -17,7 +17,7 @@ Node-xml-to-js module is easy and beginner-friendly module. It allows you to use
 
 # Installation
 ``` 
-npm install node-xml-to-js --save 
+npm install node-xml-to-json --save 
 ```
 
 
