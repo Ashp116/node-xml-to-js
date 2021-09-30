@@ -1,6 +1,6 @@
 {
-  "name": "node-xml-to-js",
-  "version": "1.0.4",
+  "name": "node-xml-to-json",
+  "version": "1.1.7",
   "description": "",
   "main": "./out/main.js",
   "types": "/typings/index.d.ts",
@@ -19,11 +19,12 @@
     "lib": "./out"
   },
   "bugs": {
-    "url": "https://github.com/Ashp116/node-xml-to-js/issues"
+    "url": "https://github.com/Ashp116/node-xml-to-json/issues"
   },
-  "homepage": "https://github.com/Ashp116/node-xml-to-js#readme",
+  "homepage": "https://github.com/Ashp116/node-xml-to-json#readme",
   "dependencies": {
     "node-xml-to-js": "^1.0.1",
+    "node-xml-to-json": "^1.1.7",
     "nodemon": "^2.0.7",
     "parse-string-boolean": "^1.0.1"
   },

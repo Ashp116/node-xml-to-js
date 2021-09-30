@@ -1,5 +1,6 @@
 /// <reference path="./typings/index.d.ts" />
 import * as parseBoolean from "parse-string-boolean";
+import * as fs from "fs";
 
 function ignoreElements(arr:string[], start: number, end: number) {
     return arr.splice(start,end)
@@ -15,7 +16,11 @@ function ignoreElement(element: string): boolean {
 }
 
 function convertTypesAuto(data: any): any {
-    if (!isNaN(parseFloat(data))) {
+    //console.log(data)
+    if ((new Date(data)).getTime() > 0) {
+        return data;
+    }
+    else if (!isNaN(parseFloat(data))) {
         return parseFloat(data);
     }
     else if (parseBoolean(data) !== null) {

@@ -15,7 +15,11 @@ function ignoreElement(element) {
     }
 }
 function convertTypesAuto(data) {
-    if (!isNaN(parseFloat(data))) {
+    //console.log(data)
+    if ((new Date(data)).getTime() > 0) {
+        return data;
+    }
+    else if (!isNaN(parseFloat(data))) {
         return parseFloat(data);
     }
     else if (parseBoolean(data) !== null) {

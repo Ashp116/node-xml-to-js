@@ -1,13 +1,13 @@
 <div align="center">
 
-# node-xml-to-js
+# node-xml-to-json
 Easily convert XML data to ***JS Object*** or ***JSON***
 
 
 
 ------------------------
 
-[![NPM](https://img.shields.io/badge/npm-v1.0.4-blue)](https://www.npmjs.com/package/node-xml-to-js)
+[![NPM](https://img.shields.io/badge/npm-v1.0.5-blue)](https://www.npmjs.com/package/node-xml-to-json)
 </div>
 
 ### Why chose this module?
