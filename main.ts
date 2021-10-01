@@ -2,6 +2,7 @@
 import * as parseBoolean from "parse-string-boolean";
 import * as fs from "fs";
 
+/** XML Utils **/
 function ignoreElements(arr:string[], start: number, end: number) {
     return arr.splice(start,end)
 }
@@ -138,6 +139,28 @@ function nestedChild(arr: string[], type?: "none" | "nested") {
     return send
 }
 
+function trimXML(data, removeDeclaration?: boolean): TrimXML {
+    /*Default Values*/
+
+    removeDeclaration = removeDeclaration || false
+    let newXML = ""
+    let declaration = ""
+    data.split('\n').forEach(((value, index) => {
+        newXML = newXML + value.trim()
+    }))
+    data.split('\r').forEach(((value, index) => {
+        newXML = newXML + value.trim()
+    }))
+
+    if (removeDeclaration) {
+        let start = newXML.lastIndexOf("<?")
+        let end = newXML.lastIndexOf("?>") + 2
+        declaration = newXML.slice(start,end)
+        newXML = newXML.replace(declaration,"")
+    }
+    return {XML: newXML, declaration: declaration};
+}
+
 function XmlParser(rawXML: string,options: ToJSONOptions | ToObjectOptions):object {
     let root = ""
     let nestedArr = []
@@ -213,25 +236,6 @@ function XmlParser(rawXML: string,options: ToJSONOptions | ToObjectOptions):obje
 
     }))
     return object
-}
-
-function trimXML(data, removeDeclaration?: boolean): TrimXML {
-    /*Default Values*/
-
-    removeDeclaration = removeDeclaration || false
-    let newXML = ""
-    let declaration = ""
-    data.split('\r\n').forEach(((value, index) => {
-        newXML = newXML + value.trim()
-    }))
-
-    if (removeDeclaration) {
-        let start = newXML.lastIndexOf("<?")
-        let end = newXML.lastIndexOf("?>") + 2
-        declaration = newXML.slice(start,end)
-        newXML = newXML.replace(declaration,"")
-    }
-    return {XML: newXML, declaration: declaration};
 }
 
 /*

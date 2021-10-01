@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.toJSON = exports.toObject = void 0;
 /// <reference path="./typings/index.d.ts" />
 const parseBoolean = require("parse-string-boolean");
+/** XML Utils **/
 function ignoreElements(arr, start, end) {
     return arr.splice(start, end);
 }
@@ -120,6 +121,25 @@ function nestedChild(arr, type) {
     });
     return send;
 }
+function trimXML(data, removeDeclaration) {
+    /*Default Values*/
+    removeDeclaration = removeDeclaration || false;
+    let newXML = "";
+    let declaration = "";
+    data.split('\n').forEach(((value, index) => {
+        newXML = newXML + value.trim();
+    }));
+    data.split('\r').forEach(((value, index) => {
+        newXML = newXML + value.trim();
+    }));
+    if (removeDeclaration) {
+        let start = newXML.lastIndexOf("<?");
+        let end = newXML.lastIndexOf("?>") + 2;
+        declaration = newXML.slice(start, end);
+        newXML = newXML.replace(declaration, "");
+    }
+    return { XML: newXML, declaration: declaration };
+}
 function XmlParser(rawXML, options) {
     let root = "";
     let nestedArr = [];
@@ -187,22 +207,6 @@ function XmlParser(rawXML, options) {
         });
     }));
     return object;
-}
-function trimXML(data, removeDeclaration) {
-    /*Default Values*/
-    removeDeclaration = removeDeclaration || false;
-    let newXML = "";
-    let declaration = "";
-    data.split('\r\n').forEach(((value, index) => {
-        newXML = newXML + value.trim();
-    }));
-    if (removeDeclaration) {
-        let start = newXML.lastIndexOf("<?");
-        let end = newXML.lastIndexOf("?>") + 2;
-        declaration = newXML.slice(start, end);
-        newXML = newXML.replace(declaration, "");
-    }
-    return { XML: newXML, declaration: declaration };
 }
 /*
 * Converts XML String to JS Object
