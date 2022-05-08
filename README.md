@@ -7,7 +7,7 @@ Easily convert XML data to ***JS Object*** or ***JSON***
 
 ------------------------
 
-[![NPM](https://img.shields.io/badge/npm-v1.0.5-blue)](https://www.npmjs.com/package/node-xml-to-json)
+[![NPM](https://img.shields.io/npm/v/node-xml-to-js)](https://www.npmjs.com/package/node-xml-to-js)
 </div>
 
 ### Why chose this module?
@@ -17,7 +17,7 @@ Node-xml-to-js module is easy and beginner-friendly module. It allows you to use
 
 # Installation
 ``` 
-npm install node-xml-to-json --save 
+npm install node-xml-to-js --save 
 ```
 
 

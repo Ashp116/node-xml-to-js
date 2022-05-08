@@ -75,7 +75,7 @@ jspm_packages/
 
 # .idea
 /.idea/
-
+/dist/
 #test.ts
 /tests/test.ts
 /tests/test.js

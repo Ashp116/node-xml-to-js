@@ -1,3 +1,9 @@
-main.ts
+node_modules
+.idea
+.gitignore
 tests
-tsconfig.json
+# ignore the .ts files
+*.ts
+
+# include the .d.ts files
+!*.d.ts

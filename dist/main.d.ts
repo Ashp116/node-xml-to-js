@@ -1,7 +1,6 @@
-// @ts-ignore
-/// <reference types="typescript" />
+/// <reference types="node" file="./main.js"/>
 
-type ToObjectOptions = {
+interface ToObjectOptions {
     ignoreAttributes?: boolean
     ignoreRoot?: boolean
     ignoreDeclaration?: boolean
@@ -21,7 +20,7 @@ export type OnAttribute = {
 
 export type TrimXML = {
     XML: string,
-    declaration: string
+    Declaration: string
 }
 
 /*
